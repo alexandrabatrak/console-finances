@@ -93,3 +93,20 @@ console.log('----------------------------');
 // Total months
 let totalMonths = finances.length;
 console.log('Total Months: ' + totalMonths);
+
+// The net total amount of Profit/Losses over the entire period.
+// https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript
+let totalNetSum = 0;
+function calculateSum(finances) {
+  for (var i = 0; i < totalMonths; i++) {
+    if (typeof finances[i] === 'number') {
+      totalNetSum += finances[i];
+
+      // recursive function to iterate from nested elements too
+    } else if (Array.isArray(finances[i])) {
+      calculateSum(finances[i]);
+    }
+  }
+}
+calculateSum(finances);
+console.log('Total: $' + totalNetSum);
