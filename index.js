@@ -110,3 +110,55 @@ function calculateSum(finances) {
 }
 calculateSum(finances);
 console.log('Total: $' + totalNetSum);
+
+// The average of the **changes** in Profit/Losses over the entire period.
+let differences = [];
+
+// start with i = 1 to start comparison from the second month
+for (let i = 1; i < totalMonths; i++) {
+  let difference = finances[i][1] - finances[i - 1][1];
+  // append the number to the differences array
+  differences.push(difference);
+}
+
+// for loop to calculate sum of differences
+let differenceSum = 0;
+for (let value of differences) {
+  differenceSum += value;
+}
+// Array.reduce method
+// https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers
+// let differenceSum = differences.reduce((accumulator, value) => {
+//   return accumulator + value;
+// }, 0);
+
+// https://bobbyhadz.com/blog/javascript-round-number-to-nearest-hundred
+// Round to nearest 100
+function roundToNearest100(num) {
+  return Math.round(num / 100) * 100;
+}
+
+let averageChange = differenceSum / totalMonths;
+console.log('Average Change: $' + roundToNearest100(averageChange));
+
+// The greatest increase in profits (date and amount) over the entire period.
+// let greatestProfitIncrease = 0;
+
+// for (i = 0; i < totalMonths; i++) {}
+
+// console.log(
+//   'Greatest Increase in Profits: ' +
+//     gainProfitMonth +
+//     '($' +
+//     greatestProfitIncrease +
+//     ')'
+// );
+
+// The greatest decrease in losses (date and amount) over the entire period.
+// console.log(
+//   'Greatest Decrease in Profits: ' +
+//     lossProfitMonth +
+//     '($' +
+//     greatestProfitLoss +
+//     ')'
+// );
