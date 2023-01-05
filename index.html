@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="en-gb">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M4 Challenge</title>
-</head>
-<body>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <link href="style.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 4 Challenge: Financial Report</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#">FR</a>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Financial report</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td>Period</td>
+              <td><span id="totalMonths"></span></td>
+            </tr>
+            <tr>
+              <td>Total Net</td>
+              <td><span id="totalNetSum"></span></td>
+            </tr>
+            <tr>
+              <td>Average Change in Profits</td>
+              <td><span id="averageChange"></span></td>
+            </tr>
+            <tr>
+              <td>Greatest Increase in Profits</td>
+              <td>
+                <span id="profitIncreaseMonth"></span
+                ><span id="profitIncreaseAmount"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Greatest Decrease in Profits</td>
+              <td>
+                <span id="profitLossMonth"></span
+                ><span id="profitLossAmount"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <p>All right reserved © Alexandra Batrak 2023</p>
+    </footer>
+    <script src="index.js"></script>
+  </body>
 </html>
