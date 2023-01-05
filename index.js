@@ -92,10 +92,11 @@ console.log('----------------------------');
 
 // Total months
 let totalMonths = finances.length;
-console.log('Total Months: ' + totalMonths);
+console.log(`Total Months: ${totalMonths}`);
 
 // The net total amount of Profit/Losses over the entire period.
 // https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript
+// https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays
 let totalNetSum = 0;
 function calculateSum(finances) {
   for (var i = 0; i < totalMonths; i++) {
@@ -109,7 +110,7 @@ function calculateSum(finances) {
   }
 }
 calculateSum(finances);
-console.log('Total: $' + totalNetSum);
+console.log(`Total: £${totalNetSum}`);
 
 // The average of the **changes** in Profit/Losses over the entire period.
 let differences = [];
@@ -138,27 +139,101 @@ function roundToNearest100(num) {
   return Math.round(num / 100) * 100;
 }
 
-let averageChange = differenceSum / totalMonths;
-console.log('Average Change: $' + roundToNearest100(averageChange));
+let averageChange = roundToNearest100(differenceSum / totalMonths);
+console.log(`Average Change: £${averageChange}`);
 
 // The greatest increase in profits (date and amount) over the entire period.
-// let greatestProfitIncrease = 0;
+// https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array
+// use Array.reduce method
+const profitIncrease = finances.reduce(
+  (max, entry) => {
+    // access the second element in array to check for max value
+    if (entry[1] > max.value) {
+      //
+      return { value: entry[1], string: entry[0] };
+    }
+    return max;
+  },
+  // object containing value and string
+  { value: -Infinity, string: '' }
+);
 
-// for (i = 0; i < totalMonths; i++) {}
-
-// console.log(
-//   'Greatest Increase in Profits: ' +
-//     gainProfitMonth +
-//     '($' +
-//     greatestProfitIncrease +
-//     ')'
-// );
+console.log(
+  `Greatest Increase in Profits ${profitIncrease.string} (£${profitIncrease.value})`
+);
 
 // The greatest decrease in losses (date and amount) over the entire period.
-// console.log(
-//   'Greatest Decrease in Profits: ' +
-//     lossProfitMonth +
-//     '($' +
-//     greatestProfitLoss +
-//     ')'
-// );
+// Same as profitIncrease method, but opposite
+const profitLoss = finances.reduce(
+  (min, entry) => {
+    // access the second element in array to check for max value
+    if (entry[1] < min.value) {
+      // return the number and then string in an object
+      return { value: entry[1], string: entry[0] };
+    }
+    return min;
+  },
+  // default values for object
+  { value: Infinity, string: '' }
+);
+console.log(
+  `Greatest Decrease in Profits ${profitLoss.string} (£${profitLoss.value})`
+);
+// ==========================================================
+// EXTRAS: display data on the page
+
+// get time period from calculating date difference of first element in array to the last
+// https://stackoverflow.com/questions/17732897/difference-between-two-dates-in-years-months-days-in-javascript
+let firstMonth = new Date(finances[0][0]);
+let lastMonth = new Date(finances[finances.length - 1][0]);
+const timeFrame = lastMonth.getTime() - firstMonth.getTime();
+// convert timeFrame from milliseconds to months
+const timeFrameinMonths = timeFrame / (1000 * 60 * 60 * 24 * (365 / 12));
+const years = Math.floor(timeFrameinMonths / 12);
+// get the remainder from division
+const months = Math.floor(timeFrameinMonths % 12);
+
+// display number as currency: src https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
+const totalMonthsHTML = document.getElementById('totalMonths');
+totalMonthsHTML.innerHTML = `${years} year${
+  years === 1 ? '' : 's'
+}, ${months} month${months === 1 ? '' : 's'}`;
+const totalNetSumHTML = document.getElementById('totalNetSum');
+totalNetSumHTML.innerHTML = totalNetSum.toLocaleString(undefined, {
+  style: 'currency',
+  currency: 'GBP',
+});
+const averageChangeHTML = document.getElementById('averageChange');
+averageChangeHTML.innerHTML = averageChange.toLocaleString(undefined, {
+  style: 'currency',
+  currency: 'GBP',
+});
+const profitIncreaseMonthHTML = document.getElementById('profitIncreaseMonth');
+profitIncreaseMonthHTML.innerHTML = profitIncrease.string;
+const profitIncreaseAmountHTML = document.getElementById(
+  'profitIncreaseAmount'
+);
+profitIncreaseAmountHTML.innerHTML =
+  ' (' +
+  profitIncrease.value.toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'GBP',
+  }) +
+  ')';
+const profitLossMonthHTML = document.getElementById('profitLossMonth');
+profitLossMonthHTML.innerHTML = profitLoss.string;
+const profitLossAmountHTML = document.getElementById('profitLossAmount');
+profitLossAmountHTML.innerHTML =
+  ' (' +
+  profitLoss.value.toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'GBP',
+  }) +
+  ')';
+
+// Substract header and footer height from main height to fit everything within 100vh.
+let main = document.querySelector('main');
+let header = document.querySelector('header').clientHeight;
+let footer = document.querySelector('footer').clientHeight;
+main.style.height = `calc(100vh - (${header}px + ${footer}px))`;
+// ==========================================================
