@@ -2,32 +2,42 @@
 
 Bootcamp Week 4 Challenge: Create code for analyzing the financial records of a company.
 
-<!-- You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
+## About
 
-Your task is to write JavaScript code that analyzes the records to calculate each of the following:
+Given: a dataset composed of arrays with two fields, Date and Profit/Losses.
 
-- The total number of months included in the dataset.
+Task: write JavaScript code that analyzes the records to calculate each of the following:
 
-- The net total amount of Profit/Losses over the entire period.
+- [x] The total number of months included in the dataset.
 
-- The average of the **changes** in Profit/Losses over the entire period.
+- [x] The net total amount of Profit/Losses over the entire period.
 
-  - You will need to track what the total change in profits are from month to month and then find the average.
-  - (`Total/Number of months`)
+- [x] The average of the **changes** in Profit/Losses over the entire period.
 
-- The greatest increase in profits (date and amount) over the entire period.
+- [x] The greatest increase in profits (date and amount) over the entire period.
 
-- The greatest decrease in losses (date and amount) over the entire period.
+- [x] The greatest decrease in losses (date and amount) over the entire period.
 
-When you open your code in the browser your resulting analysis should look similar to the following:
+All data to be logged in console.
 
-```text
-Financial Analysis
-----------------------------
-Total Months: 25
-Total: $2561231
-Average  Change: $-2315.12
-Greatest Increase in Profits: Feb-2012 ($1926159)
-Greatest Decrease in Profits: Sep-2013 ($-2196167)
-```
--->
+- Extra: Added HTML markup and display of data via JavaScript.
+
+[View the project](https://alexandrabatrak.github.io/console-finances)
+
+## Credits
+
+Obtained information:
+
+- Main functions
+
+* Sum in arrays: [1](https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript),[2](https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays),[3](https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers)
+* Index of max value in array: [1](https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array)
+
+- Extras
+
+* [Difference between two dates](https://stackoverflow.com/questions/17732897/difference-between-two-dates-in-years-months-days-in-javascript)
+* [Numbers format](https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings)
+
+## Licence
+
+Licenced under the [MIT](/LICENSE) license.
