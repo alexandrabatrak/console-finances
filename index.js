@@ -95,8 +95,6 @@ let totalMonths = finances.length;
 console.log(`Total Months: ${totalMonths}`);
 
 // The net total amount of Profit/Losses over the entire period.
-// https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript
-// https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays
 let totalNetSum = 0;
 function calculateSum(finances) {
   for (var i = 0; i < totalMonths; i++) {
@@ -128,12 +126,10 @@ for (let value of differences) {
   differenceSum += value;
 }
 // Array.reduce method
-// https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers
 // let differenceSum = differences.reduce((accumulator, value) => {
 //   return accumulator + value;
 // }, 0);
 
-// https://bobbyhadz.com/blog/javascript-round-number-to-nearest-hundred
 // Round to nearest 100
 function roundToNearest100(num) {
   return Math.round(num / 100) * 100;
@@ -143,8 +139,7 @@ let averageChange = roundToNearest100(differenceSum / totalMonths);
 console.log(`Average Change: £${averageChange}`);
 
 // The greatest increase in profits (date and amount) over the entire period.
-// https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array
-// use Array.reduce method
+// Array.reduce method
 const profitIncrease = finances.reduce(
   (max, entry) => {
     // access the second element in array to check for max value
@@ -183,7 +178,6 @@ console.log(
 // EXTRAS: display data on the page
 
 // get time period from calculating date difference of first element in array to the last
-// https://stackoverflow.com/questions/17732897/difference-between-two-dates-in-years-months-days-in-javascript
 let firstMonth = new Date(finances[0][0]);
 let lastMonth = new Date(finances[finances.length - 1][0]);
 const timeFrame = lastMonth.getTime() - firstMonth.getTime();
@@ -193,12 +187,12 @@ const years = Math.floor(timeFrameinMonths / 12);
 // get the remainder from division
 const months = Math.floor(timeFrameinMonths % 12);
 
-// display number as currency: src https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
 const totalMonthsHTML = document.getElementById('totalMonths');
 totalMonthsHTML.innerHTML = `${years} year${
   years === 1 ? '' : 's'
 }, ${months} month${months === 1 ? '' : 's'}`;
 const totalNetSumHTML = document.getElementById('totalNetSum');
+// display number as currency with toLocaleString
 totalNetSumHTML.innerHTML = totalNetSum.toLocaleString(undefined, {
   style: 'currency',
   currency: 'GBP',
