@@ -16,7 +16,7 @@ Task: write JavaScript code that analyzes the records to calculate each of the f
 
 - [x] The greatest increase in profits (date and amount) over the entire period.
 
-- [x] The greatest decrease in losses (date and amount) over the entire period.
+- [x] The greatest decrease in profits (date and amount) over the entire period.
 
 All data to be logged in console.
 
