@@ -32,7 +32,7 @@ Obtained information:
 
 * Sum in arrays: [1](https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript),[2](https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays),[3](https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers)
 * Index of max value in array: [1](https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array)
-* Snippet for average difference calculations: Olena Pelagenko @ljenchik
+* Snippet for average difference calculations: Olena Pelagenko @ljenchik :raised_hands:
 
 - Extras
 
