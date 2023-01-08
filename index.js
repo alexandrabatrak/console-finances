@@ -1,3 +1,19 @@
+/**
+ *  Console Finances
+ *  To find:
+ *    - Total months
+ *    - Total net sum
+ *    - Average of changes for the whole period
+ *    - Highest profits increase and decrease over the period
+ *
+ *  All methods are tested thoroughly and in good working order.
+ *  I wanted to find different possible solutions, so I can learn different methods to do the same thing.
+ *  During this exercise, I obtained knowledge of
+ *    - array methods like: reduce, slice, push, typeof, indexOf
+ *    - for...of loop iterations toLocale method
+ *
+ *  According to the testing done by scr https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/ and other resources 'for loop' or 'for...of' loop are better for performance. The best method will depend on specific case and size of the array - in this application array is small, so performance wouldn't make much difference, but for larger arrays 'for' or 'for...of' loops seem to be a better solution rather than using a high-order function whose perfomance slows down as the size of the array increases.
+ */
 var finances = [
   ['Jan-2010', 867884],
   ['Feb-2010', 984655],
@@ -87,97 +103,137 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-console.log('Financial Analysis');
-console.log('----------------------------');
+console.log(`Financial Analysis \n----------------------------`);
 
-// Total months
+// *Total months
 let totalMonths = finances.length;
 console.log(`Total Months: ${totalMonths}`);
 
-// The net total amount of Profit/Losses over the entire period.
+// *The net total amount of Profit/Losses over the entire period.*
 let totalNetSum = 0;
-function calculateSum(finances) {
-  for (var i = 0; i < totalMonths; i++) {
-    if (typeof finances[i] === 'number') {
-      totalNetSum += finances[i];
+// **METHOD: FOR LOOP*
+// example: better performance, more code
+// function calculateSum(finances) {
+//   for (let i = 0; i < totalMonths; i++) {
+//     if (typeof finances[i] === 'number') {
+//       totalNetSum += finances[i];
 
-      // recursive function to iterate from nested elements too
-    } else if (Array.isArray(finances[i])) {
-      calculateSum(finances[i]);
-    }
-  }
-}
+//       // recursive function to iterate from nested elements too
+//     } else if (Array.isArray(finances[i])) {
+//       calculateSum(finances[i]);
+//     }
+//   }
+// }
+
+// **METHOD: FOR...OF LOOP*
+// same as above using for...of
+// function calculateSum(finances) {
+//   for (let amount of finances) {
+//     if (typeof amount === 'number') {
+//       totalNetSum += amount;
+//     } else if (Array.isArray(amount)) {
+//       calculateSum(amount);
+//     }
+//   }
+// }
+
+// **METHOD: REDUCE
+// example: minimal code, better if performance not critical
+totalNetSum = finances.reduce((accumulator, value) => {
+  return accumulator + value;
+}, 0);
+
 calculateSum(finances);
 console.log(`Total: £${totalNetSum}`);
 
-// The average of the **changes** in Profit/Losses over the entire period.
+// *The average of the **changes** in Profit/Losses over the entire period.*
 let differences = [];
-
+// **METHOD 1: FOR LOOP*
 // start with i = 1 to start comparison from the second month
 for (let i = 1; i < totalMonths; i++) {
   let difference = finances[i][1] - finances[i - 1][1];
-  // append the number to the differences array
   differences.push(difference);
 }
 
-// for loop to calculate sum of differences
+// **METHOD 2: SLICE AND MAP*
+// start from the second element in slice
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+// differences = finances
+//   .slice(1)
+//   //iterative map method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+//   .map((element, index) => element[1] - finances[index][1]);
+
+// *Calculate the sum of differences*
+// **METHOD 1: FOR LOOP*
+// differenceSum = 0;
+// for (i = 0; i < differences.lenght; i++) {
+//   differenceSum += differences[i];
+// }
+// **METHOD 1.1: FOR...OF LOOP*
+// above as for...of loop
 let differenceSum = 0;
 for (let value of differences) {
   differenceSum += value;
 }
-// Array.reduce method
-// let differenceSum = differences.reduce((accumulator, value) => {
-//   return accumulator + value;
-// }, 0);
+// **METHOD 2: REDUCE*
+// let differenceSum = differences.reduce((accumulator, value) => { return accumulator + value;}, 0);
 
-// Round to nearest 100
-function roundToNearest100(num) {
-  return Math.round(num / 100) * 100;
+let averageChange = differenceSum / (totalMonths - 1);
+console.log(`Average Change: £${averageChange.toFixed(2)}`);
+
+// *The greatest increase and decrease in profits (date and amount) over the entire period.*
+// TODO: Find a way to not have to put the whole expression finances[differences.index(profitGain/Loss) + 1][0] over and over again. The value of index value need to be updated after the loop.
+// define variables (only because I'm using multiple methods and it's easier to test them this way, and also minimise redeclaring them for each method)
+let profitGain;
+let profitLoss;
+let profitGainMonth;
+let profitLossMonth;
+
+// **METHOD 1: REDUCE*
+// let profitGain = differences.reduce((accumulator, value) => Math.max(accumulator, value));
+// let profitGainMonth = finances[differences.indexOf(profitGain) + 1][0];
+// let profitLoss = differences.reduce((accumulator, value) => Math.min(accumulator, value));
+// let profitLossMonth = finances[differences.indexOf(profitLoss) + 1][0];
+
+// **METHOD 2: FOR LOOP*
+profitGain = differences[0];
+profitLoss = differences[0];
+// for (let i = 0; i < differences.length; i++) {
+//   if (profitGain < differences[i]) {
+//     profitGain = differences[i];
+//     // get the month from finances array, i+1 since we skip the first month
+//     profitGainMonth = finances[i + 1][0];
+//   }
+//   if (profitLoss > differences[i]) {
+//     profitLoss = differences[i];
+//     profitLossMonth = finances[i + 1][0];
+//   }
+// }
+// **METHOD 2.1: FOR...OF*
+for (let difference of differences) {
+  if (profitGain < difference) {
+    profitGain = difference;
+    profitGainMonth = finances[differences.indexOf(difference) + 1][0];
+  }
+  if (profitLoss > difference) {
+    profitLoss = difference;
+    profitLossMonth = finances[differences.indexOf(difference) + 1][0];
+  }
 }
+// **METHOD 3: MATH.MAX AND INDEXOF*
+// // 2 arrays essentially have same position of elements, but differences is 1 less, as we skip January. So, adding +1 lets access the index of the nested array inside the finances that is corresponding to the max number in differences array
+// let profitGain = Math.max(...differences);
+// let profitGainMonth = finances[differences.indexOf(profitGain) + 1][0];
+// let profitLoss = Math.min(...differences);
+// let profitLossMonth = finances[differences.indexOf(profitLoss) + 1][0];
 
-let averageChange = roundToNearest100(differenceSum / totalMonths);
-console.log(`Average Change: £${averageChange}`);
-
-// The greatest increase in profits (date and amount) over the entire period.
-// Array.reduce method
-const profitIncrease = finances.reduce(
-  (max, entry) => {
-    // access the second element in array to check for max value
-    if (entry[1] > max.value) {
-      //
-      return { value: entry[1], string: entry[0] };
-    }
-    return max;
-  },
-  // object containing value and string
-  { value: -Infinity, string: '' }
-);
-
-console.log(
-  `Greatest Increase in Profits ${profitIncrease.string} (£${profitIncrease.value})`
-);
-
-// The greatest decrease in losses (date and amount) over the entire period.
-// Same as profitIncrease method, but opposite
-const profitLoss = finances.reduce(
-  (min, entry) => {
-    // access the second element in array to check for max value
-    if (entry[1] < min.value) {
-      // return the number and then string in an object
-      return { value: entry[1], string: entry[0] };
-    }
-    return min;
-  },
-  // default values for object
-  { value: Infinity, string: '' }
-);
-console.log(
-  `Greatest Decrease in Profits ${profitLoss.string} (£${profitLoss.value})`
-);
+console.log(`Greatest Gain in Profits: ${profitGainMonth} (£${profitGain})`);
+console.log(`Greatest Decrease in Profits ${profitLossMonth} (£${profitLoss})`);
 // ==========================================================
-// EXTRAS: display data on the page
+// *EXTRAS: display data on the page
 
 // get time period from calculating date difference of first element in array to the last
+// TODO: Loop through variables to apply toLocaleString, instead of doing it for each one separately
 let firstMonth = new Date(finances[0][0]);
 let lastMonth = new Date(finances[finances.length - 1][0]);
 const timeFrame = lastMonth.getTime() - firstMonth.getTime();
@@ -188,11 +244,13 @@ const years = Math.floor(timeFrameinMonths / 12);
 const months = Math.floor(timeFrameinMonths % 12);
 
 const totalMonthsHTML = document.getElementById('totalMonths');
+// it's so similar to php method, easy peasy lol
 totalMonthsHTML.innerHTML = `${years} year${
   years === 1 ? '' : 's'
 }, ${months} month${months === 1 ? '' : 's'}`;
 const totalNetSumHTML = document.getElementById('totalNetSum');
 // display number as currency with toLocaleString
+// undefined for user's pre-set locale
 totalNetSumHTML.innerHTML = totalNetSum.toLocaleString(undefined, {
   style: 'currency',
   currency: 'GBP',
@@ -202,24 +260,22 @@ averageChangeHTML.innerHTML = averageChange.toLocaleString(undefined, {
   style: 'currency',
   currency: 'GBP',
 });
-const profitIncreaseMonthHTML = document.getElementById('profitIncreaseMonth');
-profitIncreaseMonthHTML.innerHTML = profitIncrease.string;
-const profitIncreaseAmountHTML = document.getElementById(
-  'profitIncreaseAmount'
-);
-profitIncreaseAmountHTML.innerHTML =
+const profitGainMonthHTML = document.getElementById('profitGainMonth');
+profitGainMonthHTML.innerHTML = profitGainMonth;
+const profitGainAmountHTML = document.getElementById('profitGainAmount');
+profitGainAmountHTML.innerHTML =
   ' (' +
-  profitIncrease.value.toLocaleString(undefined, {
+  profitGain.toLocaleString(undefined, {
     style: 'currency',
     currency: 'GBP',
   }) +
   ')';
 const profitLossMonthHTML = document.getElementById('profitLossMonth');
-profitLossMonthHTML.innerHTML = profitLoss.string;
+profitLossMonthHTML.innerHTML = profitLossMonth;
 const profitLossAmountHTML = document.getElementById('profitLossAmount');
 profitLossAmountHTML.innerHTML =
   ' (' +
-  profitLoss.value.toLocaleString(undefined, {
+  profitLoss.toLocaleString(undefined, {
     style: 'currency',
     currency: 'GBP',
   }) +
