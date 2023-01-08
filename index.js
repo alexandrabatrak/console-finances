@@ -115,7 +115,7 @@ console.log(`Total Months: ${totalMonths}`);
 
 // *The net total amount of Profit/Losses over the entire period.*
 let totalNetSum = 0;
-// **METHOD: FOR LOOP*
+// **METHOD 1: FOR LOOP*
 // example: better performance, more code
 // function calculateSum(finances) {
 //   for (let i = 0; i < totalMonths; i++) {
@@ -129,8 +129,7 @@ let totalNetSum = 0;
 //   }
 // }
 
-// **METHOD: FOR...OF LOOP*
-// same as above using for...of
+// **METHOD 1.1: FOR...OF LOOP*
 // function calculateSum(finances) {
 //   for (let amount of finances) {
 //     if (typeof amount === 'number') {
@@ -140,14 +139,15 @@ let totalNetSum = 0;
 //     }
 //   }
 // }
+// calculateSum(finances);
 
-// **METHOD: REDUCE
+// **METHOD 2: REDUCE
 // example: minimal code, better if performance not critical
 totalNetSum = finances.reduce((accumulator, value) => {
-  return accumulator + value;
+  // add the second element in the array
+  return accumulator + value[1];
 }, 0);
 
-calculateSum(finances);
 console.log(`Total: £${totalNetSum}`);
 
 // *The average of the **changes** in Profit/Losses over the entire period.*
@@ -175,18 +175,24 @@ for (let i = 1; i < totalMonths; i++) {
 // }
 // **METHOD 1.1: FOR...OF LOOP*
 // above as for...of loop
-let differenceSum = 0;
-for (let value of differences) {
-  differenceSum += value;
-}
-// **METHOD 2: REDUCE*
-// let differenceSum = differences.reduce((accumulator, value) => { return accumulator + value;}, 0);
+// let differenceSum = 0;
+// for (let value of differences) {
+//   differenceSum += value;
+// }
 
-let averageChange = differenceSum / (totalMonths - 1);
+// let averageChange = differenceSum / (totalMonths - 1);
+
+// **METHOD 2: REDUCE*
+// MERGE averageChange with REDUCE
+let averageChange =
+  differences.reduce((accumulator, value) => {
+    return accumulator + value;
+  }, 0) /
+  (totalMonths - 1);
+// toFixed to round it up to the nearst 100th
 console.log(`Average Change: £${averageChange.toFixed(2)}`);
 
 // *The greatest increase and decrease in profits (date and amount) over the entire period.*
-// TODO: Find a way to not have to put the whole expression finances[differences.index(profitGain/Loss) + 1][0] over and over again. The value of index value need to be updated after the loop.
 // define variables (only because I'm using multiple methods and it's easier to test them this way, and also minimise redeclaring them for each method)
 let profitGain;
 let profitLoss;
@@ -194,14 +200,21 @@ let profitGainMonth;
 let profitLossMonth;
 
 // **METHOD 1: REDUCE*
-// let profitGain = differences.reduce((accumulator, value) => Math.max(accumulator, value));
+// profitGain = differences.reduce((accumulator, value) => Math.max(accumulator, value));
+// profitLoss = differences.reduce((accumulator, value) => Math.min(accumulator, value));
+// **METHOD 2: MATH.MAX & INDEXOF*
+
+// profitGain = Math.max(...differences);
+// profitLoss = Math.min(...differences);
+// SAME FOR BOTH METHODS
+// // 2 arrays essentially have same position of elements, but differences is 1 less, as we skip January. So, adding +1 lets access the index of the nested array inside the finances that is corresponding to the max number in differences array
 // let profitGainMonth = finances[differences.indexOf(profitGain) + 1][0];
-// let profitLoss = differences.reduce((accumulator, value) => Math.min(accumulator, value));
 // let profitLossMonth = finances[differences.indexOf(profitLoss) + 1][0];
 
-// **METHOD 2: FOR LOOP*
+// Set variables for loops starting at the first element in differences array
 profitGain = differences[0];
 profitLoss = differences[0];
+// **METHOD 3: FOR LOOP*
 // for (let i = 0; i < differences.length; i++) {
 //   if (profitGain < differences[i]) {
 //     profitGain = differences[i];
@@ -213,7 +226,7 @@ profitLoss = differences[0];
 //     profitLossMonth = finances[i + 1][0];
 //   }
 // }
-// **METHOD 2.1: FOR...OF*
+// **METHOD 3.1: FOR...OF*
 for (let difference of differences) {
   if (profitGain < difference) {
     profitGain = difference;
@@ -224,12 +237,6 @@ for (let difference of differences) {
     profitLossMonth = finances[differences.indexOf(difference) + 1][0];
   }
 }
-// **METHOD 3: MATH.MAX AND INDEXOF*
-// // 2 arrays essentially have same position of elements, but differences is 1 less, as we skip January. So, adding +1 lets access the index of the nested array inside the finances that is corresponding to the max number in differences array
-// let profitGain = Math.max(...differences);
-// let profitGainMonth = finances[differences.indexOf(profitGain) + 1][0];
-// let profitLoss = Math.min(...differences);
-// let profitLossMonth = finances[differences.indexOf(profitLoss) + 1][0];
 
 console.log(`Greatest Gain in Profits: ${profitGainMonth} (£${profitGain})`);
 console.log(`Greatest Decrease in Profits ${profitLossMonth} (£${profitLoss})`);
@@ -252,38 +259,37 @@ const totalMonthsHTML = document.getElementById('totalMonths');
 totalMonthsHTML.innerHTML = `${years} year${
   years === 1 ? '' : 's'
 }, ${months} month${months === 1 ? '' : 's'}`;
+
+// get all elements
 const totalNetSumHTML = document.getElementById('totalNetSum');
-// display number as currency with toLocaleString
-// undefined for user's pre-set locale
-totalNetSumHTML.innerHTML = totalNetSum.toLocaleString(undefined, {
-  style: 'currency',
-  currency: 'GBP',
-});
 const averageChangeHTML = document.getElementById('averageChange');
-averageChangeHTML.innerHTML = averageChange.toLocaleString(undefined, {
-  style: 'currency',
-  currency: 'GBP',
-});
 const profitGainMonthHTML = document.getElementById('profitGainMonth');
-profitGainMonthHTML.innerHTML = profitGainMonth;
 const profitGainAmountHTML = document.getElementById('profitGainAmount');
-profitGainAmountHTML.innerHTML =
-  ' (' +
-  profitGain.toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'GBP',
-  }) +
-  ')';
 const profitLossMonthHTML = document.getElementById('profitLossMonth');
-profitLossMonthHTML.innerHTML = profitLossMonth;
 const profitLossAmountHTML = document.getElementById('profitLossAmount');
-profitLossAmountHTML.innerHTML =
-  ' (' +
-  profitLoss.toLocaleString(undefined, {
+// apply month values
+profitGainMonthHTML.innerHTML = profitGainMonth;
+profitLossMonthHTML.innerHTML = profitLossMonth;
+
+// Loop to display number as currency with toLocaleString
+const html = [
+  totalNetSumHTML,
+  averageChangeHTML,
+  profitGainAmountHTML,
+  profitLossAmountHTML,
+];
+const values = [totalNetSum, averageChange, profitGain, profitLoss];
+
+// undefined for user's pre-set locale
+// + apply brackets only for increase/decrease
+for (let i = 0; i < html.length; i++) {
+  html[i].innerHTML = ` ${
+    values[i] === profitGain || values[i] === profitLoss ? '(' : ''
+  }${values[i].toLocaleString(undefined, {
     style: 'currency',
     currency: 'GBP',
-  }) +
-  ')';
+  })}${values[i] === profitGain || values[i] === profitLoss ? ')' : ''}`;
+}
 
 // Substract header and footer height from main height to fit everything within 100vh.
 let main = document.querySelector('main');
