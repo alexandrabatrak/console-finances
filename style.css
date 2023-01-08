@@ -1,13 +1,15 @@
 /* palette */
 :root {
   --white: #eaf6ff;
-  --accent: #ffa400;
-  --primary: #009ffd;
-  --primary-rgb: 0, 159, 253;
-  --secondary: #2a2a72;
-  --secondary-rgb: 42, 42, 114;
-  --border: 2px solid rgba(var(--secondary-rgb), 0.15);
-  --box-shadow: 0 5px 20px rgba(var(--secondary-rgb), 0.35);
+  --accent: #b8dfe5;
+  --primary: #8a7de7;
+  --light: #d2d9bb;
+  --light-rgb: 210, 217, 187;
+  --primary-rgb: 138, 125, 231;
+  --secondary: #312a63;
+  --secondary-rgb: 49, 42, 99;
+  --border: 2px solid rgba(var(--light-rgb), 0.25);
+  --box-shadow: 1px 7px 20px 2px rgba(var(--primary-rgb), 0.65);
   --transition: all 0.3s ease-in-out;
 }
 
@@ -22,20 +24,26 @@ header nav a {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
-  color: var(--secondary);
+  letter-spacing: -6px;
+  color: var(--primary);
   margin: 1rem;
   padding: 1rem;
   border: 3px solid var(--accent);
   transition: var(--transition);
 }
+header nav a span {
+  color: var(--light);
+}
 
-header nav a:hover {
+header nav a:hover,
+header nav a:hover span {
   color: var(--accent);
-  border-color: var(--secondary);
+  border-color: var(--primary);
 }
 
 body {
   background: var(--white);
+  background-image: url('./images/bg.jpg');
   color: var(--secondary);
   margin: 0;
   padding: 0;
@@ -52,6 +60,7 @@ section {
   border-radius: 0.5rem;
   box-shadow: var(--box-shadow);
   transition: var(--transition);
+  backdrop-filter: blur(20px);
 }
 
 h2 {
@@ -64,7 +73,7 @@ h2 {
 }
 
 section:hover {
-  --box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.35);
+  --box-shadow: 1px 7px 20px rgba(var(--secondary-rgb), 0.25);
 }
 
 section:hover h2 {
@@ -89,7 +98,7 @@ td:first-child {
 }
 
 td:last-child {
-  color: var(--primary);
+  color: var(--secondary);
   font-weight: bold;
 }
 
@@ -98,6 +107,6 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 2rem 0;
-  color: var(--primary);
+  color: var(--secondary);
   box-shadow: var(--box-shadow);
 }
