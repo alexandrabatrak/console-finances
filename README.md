@@ -34,14 +34,14 @@ Obtained information and snippets:
 
 - Main functions
 
-* Sum in arrays: [1](https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript),[2](https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays),[3](https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers)
-* Index of max value in array: [1](https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array)
-* Snippet for average difference calculations: Olena Pelagenko @ljenchik :raised_hands:
+  - Sum in arrays: [1](https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript),[2](https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays),[3](https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers)
+  - Index of max value in array: [1](https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array)
+  - Snippet for average difference calculations: Olena Pelagenko @ljenchik :raised_hands:
 
 - Extras
 
-* [Difference between two dates](https://stackoverflow.com/questions/17732897/difference-between-two-dates-in-years-months-days-in-javascript)
-* [Numbers format](https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings)
+  - [Difference between two dates](https://stackoverflow.com/questions/17732897/difference-between-two-dates-in-years-months-days-in-javascript)
+  - [Numbers format](https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings)
 
 ## Licence
 
