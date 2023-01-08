@@ -24,9 +24,13 @@ All data to be logged in console.
 
 [View the project](https://alexandrabatrak.github.io/console-finances)
 
+![Screenshot](./images/screenshot.png)
+
 ## Credits
 
-Obtained information:
+Background image by [Milad Fakurian @Unsplash](https://unsplash.com/photos/PGdW_bHDbpI)
+
+Obtained information and snippets:
 
 - Main functions
 
