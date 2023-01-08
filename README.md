@@ -1,6 +1,6 @@
 # Console Finances
 
-Bootcamp Week 4 Challenge: Create code for analyzing the financial records of a company.
+Bootcamp Week 4 Challenge: Create code for analyzing the financial records of a company. :purple_heart:
 
 ## About
 
@@ -22,7 +22,7 @@ All data to be logged in console.
 
 - Extra: Added HTML markup and display of data via JavaScript.
 
-[View the project](https://alexandrabatrak.github.io/console-finances)
+[View the project](https://alexandrabatrak.github.io/console-finances) :receipt:
 
 ![Screenshot](./images/screenshot.png)
 
