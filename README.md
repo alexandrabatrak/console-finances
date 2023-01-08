@@ -46,3 +46,5 @@ Obtained information and snippets:
 ## Licence
 
 Licenced under the [MIT](/LICENSE) license.
+
+*Copyright © 2023 Alexandra Batrak*
