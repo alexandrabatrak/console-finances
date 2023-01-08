@@ -14,7 +14,7 @@
  *    - array methods like: reduce, slice, push, typeof, indexOf
  *    - for...of loop iterations toLocale method
  *
- *  According to the testing done by scr https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/ and other resources 'for loop'
+ *  According to the testing done by scr=(https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/) and other resources 'for loop'
  *  or 'for...of' loop are better for performance.
  *  The best method will depend on specific case and size of the array - in this application array is small,
  *  so performance wouldn't make much difference, but for larger arrays 'for' or 'for...of' loops seem to be a
