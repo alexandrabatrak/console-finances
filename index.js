@@ -12,7 +12,11 @@
  *    - array methods like: reduce, slice, push, typeof, indexOf
  *    - for...of loop iterations toLocale method
  *
- *  According to the testing done by scr https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/ and other resources 'for loop' or 'for...of' loop are better for performance. The best method will depend on specific case and size of the array - in this application array is small, so performance wouldn't make much difference, but for larger arrays 'for' or 'for...of' loops seem to be a better solution rather than using a high-order function whose perfomance slows down as the size of the array increases.
+ *  According to the testing done by scr https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/ and other resources 'for loop'
+ *  or 'for...of' loop are better for performance.
+ *  The best method will depend on specific case and size of the array - in this application array is small,
+ *  so performance wouldn't make much difference, but for larger arrays 'for' or 'for...of' loops seem to be a
+ *  better solution rather than using a high-order function whose perfomance slows down as the size of the array increases.
  */
 var finances = [
   ['Jan-2010', 867884],
