@@ -248,14 +248,17 @@ console.log(`Greatest Decrease in Profits ${profitLossMonth} (£${profitLoss})`)
 // *EXTRAS: display data on the page*
 
 // // get time period from calculating date difference of first element in array to the last
-let firstMonth = new Date(finances[0][0]);
-let lastMonth = new Date(finances[finances.length - 1][0]);
-const timeFrame = lastMonth.getTime() - firstMonth.getTime();
-// // convert timeFrame from milliseconds to months
-const timeFrameinMonths = timeFrame / (1000 * 60 * 60 * 24 * (365 / 12));
-const years = Math.floor(timeFrameinMonths / 12);
-// // get the remainder from division
-const months = Math.floor(timeFrameinMonths % 12);
+// let firstMonth = new Date(finances[0][0]);
+// let lastMonth = new Date(finances[finances.length - 1][0]);
+// const timeFrame = lastMonth.getTime() - firstMonth.getTime();
+// // // convert timeFrame from milliseconds to months
+// const timeFrameinMonths = timeFrame / (1000 * 60 * 60 * 24 * (365 / 12));
+// const years = Math.floor(timeFrameinMonths / 12);
+// // // get the remainder from division
+// const months = timeFrameinMonths % 12;
+// simpler calculations method
+let years = Math.floor(totalMonths / 12);
+let months = totalMonths % 12;
 
 const totalMonthsHTML = document.getElementById('totalMonths');
 totalMonthsHTML.innerHTML = `${years} year${
