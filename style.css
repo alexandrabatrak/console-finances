@@ -44,6 +44,8 @@ header nav a:hover span {
 body {
   background: var(--white);
   background-image: url('./images/bg.jpg');
+  background-size: cover;
+  background-repeat: none;
   color: var(--secondary);
   margin: 0;
   padding: 0;
