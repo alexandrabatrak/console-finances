@@ -36,7 +36,7 @@ Obtained information and snippets:
 
   - Sum in arrays: [1](https://www.tutorialspoint.com/how-to-sum-all-elements-in-a-nested-array-javascript),[2](https://www.quora.com/What-is-the-best-algorithm-to-sum-numbers-in-nested-arrays),[3](https://bobbyhadz.com/blog/javascript-get-sum-of-array-of-numbers)
   - Index of max value in array: [1](https://bobbyhadz.com/blog/javascript-get-index-of-max-value-in-array)
-  - Snippet for average difference calculations: Olena Pelagenko @ljenchik :raised_hands:
+  - Snippet for average difference calculations (Array.reduce): Olena Pelagenko @ljenchik :raised_hands:
 
 - Extras
 
@@ -46,5 +46,7 @@ Obtained information and snippets:
 ## Licence
 
 Licenced under the [MIT](/LICENSE) license.
+
+[![Image of github-profile-views-counter](https://github.com/alexandrabatrak/github-profile-views-counter/blob/master/svg/585246516/badge.svg)](https://github.com/alexandrabatrak/github-profile-views-counter/blob/master/readme/585246516/week.md)
 
 *Copyright © 2023 Alexandra Batrak*
