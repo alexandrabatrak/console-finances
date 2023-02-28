@@ -1,6 +1,6 @@
 # Console Finances
 
-Bootcamp Week 4 Challenge: Create code for analyzing the financial records of a company. :purple_heart:
+Code for analyzing the financial records of a company. :purple_heart:
 
 ## About
 
